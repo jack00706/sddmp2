@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" 
+        href="img/minicona.png" 
+        type="image/png" />
+  <title>Monster Manual</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Dark Mode */
+    /* Dark Mode */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+
+    #pdf-render {
+      border: 1px solid #444;
+      margin: 20px auto;
+      display: block;
+      background-color: #333;
+    }
+
+    .controlsM {
+      margin: 10px;
+    }
+
+    button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #777;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="text-center thext-light">Dispositivo Del Dungeon Master Pigro</h1>
+</header>
+
+  <div class="controlsM">
+    <button onclick="prevPage()">◀️ Indietro</button>
+    <button onclick="nextPage()">Avanti ▶️</button>
+    <button onclick="zoomOut()">➖ Zoom Out</button>
+    <button onclick="zoomIn()">➕ Zoom In</button>
+  </div>
+
+  <canvas id="pdf-render"></canvas>
+
+  <p>Pagina <span id="page-num"></span> / <span id="page-count"></span></p>
+
+  <footer>
+    <p>&copy; 2025 SDDMP. Tutti i diritti riservati.</p>
+</footer>
+
+  <script>
+    // Usa il percorso relativo al PDF
+    const url = "pdf/Book3.pdf"; // Modifica con il percorso corretto
+
+    let pdfDoc = null,
+        pageNum = 1,
+        scale = 1.5,
+        canvas = document.getElementById('pdf-render'),
+        ctx = canvas.getContext('2d'),
+        pageRendering = false,
+        pageNumPending = null;
+
+    // Carica il PDF
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+      pdfDoc = pdfDoc_;
+      document.getElementById('page-count').textContent = pdfDoc.numPages;
+      renderPage(pageNum);
+    });
+
+    function renderPage(num) {
+      pageRendering = true;
+
+      pdfDoc.getPage(num).then(function(page) {
+        const viewport = page.getViewport({ scale: scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        const renderTask = page.render(renderContext);
+
+        renderTask.promise.then(function() {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+
+      document.getElementById('page-num').textContent = num;
+    }
+
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    function prevPage() {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    }
+
+    function nextPage() {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
+
+    function zoomIn() {
+      scale += 0.25;
+      queueRenderPage(pageNum);
+    }
+
+    function zoomOut() {
+      if (scale > 0.5) {
+        scale -= 0.25;
+        queueRenderPage(pageNum);
+      }
+    }
+
+  </script>
+
+</body>
+</html>

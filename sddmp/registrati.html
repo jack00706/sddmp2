@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" 
+        href="img/minicona.png" 
+        type="image/png" />
+  <title>Registrati</title>
+  <link rel="stylesheet" href="styles.css">
+   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    
+    main { flex: 1; display: flex; justify-content: center; align-items: center; }
+    .page-container { width:100%; max-width:500px; padding:20px; }
+    .form {
+      background: #363636;
+      border-radius: 10px;
+      padding: 30px;
+    }
+    .form p#heading {
+      font-size: 1.5em;
+      color: #f0f0f0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .field { position: relative; margin-bottom: 20px; }
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: #888;
+      width: 20px;
+      height: 20px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px 10px 10px 40px;
+      border: none;
+      border-radius: 5px;
+    }
+    .button1, .button2 {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .button1 { background: #4CAF50; color: white; }
+    .button2 { background: #2196F3; color: white; }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #222;
+      color: white;
+    }
+
+        .logo img {
+  width: 40px;
+  height: auto;
+  display: block;
+  margin-right: 15px;
+}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+
+          <div class="logo">
+      <a href="index.php">
+        <img src="img/icona.png" alt="Logo sito">
+      </a>
+    </div>
+    
+    <h1 class="site-title">Sito Del Dungeon Master Pigro</h1>
+  </div>
+     <nav class="main-nav">
+            <a href="index.php">Home Page</a>
+          </nav>
+</header>
+
+  <main>
+    <div class="page-container">
+      <form action="registrati.php" method="post" class="form">
+        <p id="heading">Registrati</p>
+
+        <!-- Email Field -->
+        <div class="field">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a.5.5 0 0 0-.5.5v.217l6 3.6 6-3.6V4a.5.5 0 0 0-.5-.5H2zm13 2.383l-5.857 3.514L15 12.117V5.883zm-1 .734L8.144 9.77a.5.5 0 0 1-.288.082.5.5 0 0 1-.288-.082L2 6.617V12h12V6.617z"/>
+          </svg>
+          <input name="email" type="email" placeholder="Email" class="input-field" required>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M8 1a3 3 0 0 0-3 3v3H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-1V4a3 3 0 0 0-3-3zM5 4a3 3 0 0 1 6 0v3H5V4zm6 4v4H5v-4h6z"/>
+          </svg>
+          <input name="password" type="password" placeholder="Password" class="input-field" required>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="field">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M8 1a3 3 0 0 0-3 3v3H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-1V4a3 3 0 0 0-3-3zM5 4a3 3 0 0 1 6 0v3H5V4zm6 4v4H5v-4h6z"/>
+          </svg>
+          <input name="confirm_password" type="password" placeholder="Conferma Password" class="input-field" required>
+        </div>
+
+        <!-- Buttons -->
+        <div>
+          <button type="submit" class="button1">Registrati</button>
+          <button type="button" class="button2" onclick="window.location.href='login.html'">
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SDDMP. Tutti i diritti riservati.</p>
+  </footer>
+
+</body>
+</html>

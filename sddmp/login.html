@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" 
+        href="img/minicona.png" 
+        type="image/png" />
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: flex; flex-direction: column;
+      background-color: #fff;
+    }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; }
+    .page-container { width: 100%; max-width: 500px; padding: 20px; }
+    .form {
+      background: #363636; border-radius: 10px; padding: 30px;
+    }
+    .form p#heading {
+      font-size: 1.5em; color: #f0f0f0; text-align: center; margin-bottom: 20px;
+    }
+    .field { position: relative; margin-bottom: 20px; }
+    .input-icon {
+      position: absolute; top: 50%; left: 10px; transform: translateY(-50%);
+      color: #888;
+    }
+    .input-field {
+      width: 100%; padding: 10px 10px 10px 40px;
+      border: none; border-radius: 5px;
+    }
+    .button1, .button2 {
+      padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;
+      font-weight: bold; margin-right: 10px;
+    }
+    .button1 { background: #4CAF50; color: white; }
+    .button2 { background: #2196F3; color: white; }
+    footer {
+      text-align: center; padding: 15px; background: #222; color: white;
+    }
+
+        .logo img {
+  width: 40px;
+  height: auto;
+  display: block;
+  margin-right: 15px;
+}
+  </style>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("login") === "error")   alert("❌ Errore nel login. Controlla le credenziali.");
+    if (params.get("register") === "error")alert("❌ Errore durante la registrazione.");
+    if (params.get("login")||params.get("register")) {
+      history.replaceState({}, document.title, window.location.pathname);
+    }
+  </script>
+</head>
+<body>
+<header>
+  <div class="header-top">
+
+          <div class="logo">
+      <a href="index.php">
+        <img src="img/icona.png" alt="Logo sito">
+      </a>
+    </div>
+    
+    <h1 class="site-title">Sito Del Dungeon Master Pigro</h1>
+  </div>
+     <nav class="main-nav">
+            <a href="index.php">Home Page</a>
+          </nav>
+</header>
+  <main>
+    <div class="page-container">
+      <form action="login.php" method="post" class="form">
+        <p id="heading">Login</p>
+        <div class="field">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20">
+            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646..."/>
+          </svg>
+          <input name="email" type="text" placeholder="Email" class="input-field" required>
+        </div>
+        <div class="field">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2..."/>
+          </svg>
+          <input name="password" type="password" placeholder="Password" class="input-field" required>
+        </div>
+        <div>
+          <button type="submit" class="button1">Login</button>
+          <button type="button" class="button2" onclick="window.location.href='registrati.html'">
+            Registrati
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 SDDMP. Tutti i diritti riservati.</p>
+  </footer>
+</body>
+</html>
